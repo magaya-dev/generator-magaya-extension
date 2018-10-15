@@ -34,4 +34,16 @@ You are now ready to get started with the Extensions generator. The generator wi
 
 ## Extensions Generator
 
+To start a new project, in the Command Prompt, navigate to the directory where you want to store the code and run:
+
+```
+$ yo magaya-extension
+```
+
+This will launch the generator and prompt you with some data about the extension like company name, extension name, description and the type of project you want to create.
+
+Then, the generator will create a folder with the name as *company name*-*extension name*
+
+After the project is created you can open it with Visual Studio Code or any other IDE. If you selected the **Web server** or **Background only** project templates you need to change the connection string to connect to your Magaya Database.
+
 ## Installer Generator
