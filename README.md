@@ -47,3 +47,13 @@ Then, the generator will create a folder with the name as *company name*-*extens
 After the project is created you can open it with Visual Studio Code or any other IDE. If you selected the **Web server** or **Background only** project templates you need to change the connection string to connect to your Magaya Database.
 
 ## Installer Generator
+
+Once you're done developing your extension or whenever you're ready to test it in your local Magaya Installation you can use this generator to deploy it locally:
+
+```
+$ yo magaya-extension:install
+```
+
+This generator will ask you for the folder where your source code is, the folder where your Magaya is installed and then it will see how many instances of the Communication Suite you have configured, then it will ask you in which one you want to put the extension.
+
+After that you're ready to go and test your extension running in your Magaya, just remember to restart the Communication Suite where it was installed in.
