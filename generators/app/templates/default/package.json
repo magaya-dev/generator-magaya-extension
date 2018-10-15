@@ -1,0 +1,15 @@
+{
+    "name": <%- JSON.stringify(id) %>,
+    "version": "0.0.1",
+    "description": <%- JSON.stringify(description) %>,
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": <%- JSON.stringify(company) %>,
+    "license": "MIT",
+    "dependencies": {
+      "commander": "^2.17.1"
+    },
+    "devDependencies": {}
+  }

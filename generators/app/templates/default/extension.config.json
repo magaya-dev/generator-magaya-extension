@@ -1,0 +1,25 @@
+{
+	"id": {
+		"company": <%- JSON.stringify(company) %>,
+		"name": <%- JSON.stringify(name) %>
+	},
+	"version": "0.0.1",
+	"minimumMagayaVersion": "11.0.3",
+	"type": "httpServer",
+	"license": "MIT",
+	"install": {
+		"engine": "node",
+		"manager": "npm",
+		"name": <%- JSON.stringify(id) %>
+	},
+	"launch": {
+		"engine": "pm2",
+		"cluster": true,
+		"main": <%- JSON.stringify(mainFile) %>
+	},
+	"interface": {
+		"title": <%- JSON.stringify(name) %>,
+		"sections": {
+		}
+	}
+}
