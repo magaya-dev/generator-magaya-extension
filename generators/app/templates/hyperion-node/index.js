@@ -1,8 +1,9 @@
 // helper package for parsing command arguments
 const program = require('commander');
 const packageJson = require('./package.json');
-// require hyperion helper package
-const hyperion = require('@magaya/hyperion-node')(process.argv, '');
+const extConfigJson = require('./extension.config.json');
+// require hyperion helper package. Pass as the second argument the unique identifier of our extension
+const hyperion = require('@magaya/hyperion-node')(process.argv, `${extConfigJson.id.company}-${extConfigJson.id.name}`);
 
 program.version(packageJson.version)
     .option('-p, --port <n>', 'running port', parseInt)

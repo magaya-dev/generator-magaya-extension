@@ -1,13 +1,23 @@
 // helper package for parsing command arguments
 const program = require('commander');
 const packageJson = require('./package.json');
-// require the hyperion middleware, pass the required arguments to connect to the database
-// the second parameter is optional, if you specify it it will include specialized APIs like the one for LiveTrack Mobile (ltm)
-const hyperion = require('@magaya/hyperion-express-middleware').middleware(process.argv,'');
+const extConfigJson = require('./extension.config.json');
+// require the hyperion middleware
+const hyperionMiddleware = require('@magaya/hyperion-express-middleware');
+// create the hyperion middleware for express.js, pass the required arguments to connect to the database
+// the second parameter is the unique identifier of the extension connecting to the database
+// it can also mean including specialized APIs like the one for LiveTrack Mobile (magaya-ltm)
+const middleware = hyperionMiddleware.middleware(process.argv, `${extConfigJson.id.company}-${extConfigJson.id.name}`);
 // require the express framework and create an instance of it
 const app = require('express')();
 // helper package to get the body of requests
 const bodyParser = require("body-parser");
+// require the config helper
+const fsHelper = require('@magaya/extension-fs-helper');
+// helper for paths
+const path = require('path');
+// helper for filesystem
+const fs = require('fs');
 
 program.version(packageJson.version)
     .option('-p, --port <n>', 'running port', parseInt)
@@ -26,8 +36,20 @@ if (!program.port) {
     process.exit(1);
 }
 
+// let's assume this is our Magaya NetworkId
+const networkId = 12345;
+// retrieve the config folder for this instance of the extension
+const configFolder = fsHelper.GetExtensionDataFolder(extConfigJson.id, networkId);
+const configFile = path.join(configFolder, 'config.json');
+// save a configuration file in the proper folder
+const configJson = {
+    "value" : 123
+};
+// write the configuration to the filesystem
+fs.writeFileSync(configFile, JSON.stringify(configJson), 'utf8');
+
 // apply the middleware in the application
-app.use(hyperion);
+app.use(middleware);
 // apply other helper middlewares
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
