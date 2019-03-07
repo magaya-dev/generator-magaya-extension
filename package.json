@@ -13,9 +13,7 @@
   "author": "Magaya",
   "license": "MIT",
   "dependencies": {
-    "deep-extend": "^0.6.0",
     "fs-extra": "^7.0.0",
-    "mem-fs-editor": "^5.1.0",
     "yeoman-generator": "^1.0.0",
     "yosay": "^2.0.2"
   }

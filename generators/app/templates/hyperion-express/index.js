@@ -36,10 +36,8 @@ if (!program.port) {
     process.exit(1);
 }
 
-// let's assume this is our Magaya NetworkId
-const networkId = 12345;
 // retrieve the config folder for this instance of the extension
-const configFolder = fsHelper.GetExtensionDataFolder(extConfigJson.id, networkId);
+const configFolder = fsHelper.GetExtensionDataFolder(extConfigJson.id, program.networkId);
 const configFile = path.join(configFolder, 'config.json');
 // save a configuration file in the proper folder
 const configJson = {
