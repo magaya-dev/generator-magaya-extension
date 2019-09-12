@@ -3,7 +3,11 @@ const program = require('commander');
 const packageJson = require('./package.json');
 const extConfigJson = require('./extension.config.json');
 // require hyperion helper package. Pass as the second argument the unique identifier of our extension
-const hyperion = require('@magaya/hyperion-node')(process.argv, `${extConfigJson.id.company}-${extConfigJson.id.name}`);
+const apiKey = '<YOUR-API-KEY-HERE>';
+const hyperion = require('@magaya/hyperion-node')(process.argv, {
+    'clientId' : `${extConfigJson.id.company}-${extConfigJson.id.name}`,
+    'apiKey' : apiKey
+});
 
 program.version(packageJson.version)
     .option('-p, --port <n>', 'running port', parseInt)

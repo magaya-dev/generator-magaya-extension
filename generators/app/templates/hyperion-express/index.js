@@ -5,9 +5,13 @@ const extConfigJson = require('./extension.config.json');
 // require the hyperion middleware
 const hyperionMiddleware = require('@magaya/hyperion-express-middleware');
 // create the hyperion middleware for express.js, pass the required arguments to connect to the database
-// the second parameter is the unique identifier of the extension connecting to the database
+// the second parameter contains the unique identifier of the extension connecting to the database
 // it can also mean including specialized APIs like the one for LiveTrack Mobile (magaya-ltm)
-const middleware = hyperionMiddleware.middleware(process.argv, `${extConfigJson.id.company}-${extConfigJson.id.name}`);
+const apiKey = '<YOUR-API-KEY-HERE>';
+const middleware = hyperionMiddleware.middleware(process.argv, {
+    'clientId' : `${extConfigJson.id.company}-${extConfigJson.id.name}`,
+    'apiKey' : apiKey
+});
 // require the express framework and create an instance of it
 const app = require('express')();
 // helper package to get the body of requests
