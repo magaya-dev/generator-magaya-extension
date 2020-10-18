@@ -10,7 +10,7 @@
     "author": <%- JSON.stringify(company) %>,
     "license": "MIT",
     "dependencies": {
-      "commander": "^2.20.0"
+      "commander": "^6.1.0"
     },
     "devDependencies": {}
   }

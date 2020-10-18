@@ -10,9 +10,9 @@
     "author": <%- JSON.stringify(company) %>,
     "license": "MIT",
     "dependencies": {
-      "@magaya/extension-fs-helper": "^0.0.5",
+      "@magaya/extension-fs-helper": "^0.1.0",
       "body-parser": "^1.19.0",
-      "commander": "^2.20.0",
+      "commander": "^6.1.0",
       "express": "^4.17.1"
     },
     "devDependencies": {}
