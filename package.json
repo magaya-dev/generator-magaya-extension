@@ -18,7 +18,8 @@
     "yosay": "^2.0.2"
   },
   "devDependencies": {
+    "axios": ">=0.21.1",
     "minimist": ">=1.2.5",
-    "lodash": ">=4.17.19"
+    "lodash": ">=4.17.20"
   }
 }
