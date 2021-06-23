@@ -1,5 +1,5 @@
 // helper package for parsing command arguments
-const program = require('commander');
+const {program} = require('commander');
 const packageJson = require('./package.json');
 
 program.version(packageJson.version)
@@ -12,12 +12,13 @@ program.version(packageJson.version)
     .option('--no-daemon', 'pm2 no daemon option')
     .parse(process.argv);
 
-if (!program.port) {
+const options = program.opts();
+if (!options.port) {
     console.log('Must submit port on which to listen...');
     process.exit(1);
-} else if (!program.root) {
+} else if (!options.root) {
     console.log('Must submit root...');
     process.exit(1);
 }
 
-console.log(`App started on port ${program.port}...`);
+console.log(`App started on port ${options.port}...`);

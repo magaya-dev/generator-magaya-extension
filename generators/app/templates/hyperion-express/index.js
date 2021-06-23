@@ -1,5 +1,5 @@
 // helper package for parsing command arguments
-const program = require('commander');
+const {program} = require('commander');
 const packageJson = require('./package.json');
 const extConfigJson = require('./extension.config.json');
 // require the hyperion middleware
@@ -13,9 +13,8 @@ const middleware = hyperionMiddleware.middleware(process.argv, {
     'apiKey' : apiKey
 });
 // require the express framework and create an instance of it
-const app = require('express')();
-// helper package to get the body of requests
-const bodyParser = require("body-parser");
+const express = require('express');
+const app = express();
 // require the config helper
 const fsHelper = require('@magaya/extension-fs-helper');
 // helper for paths
@@ -33,16 +32,17 @@ program.version(packageJson.version)
     .option('--no-daemon', 'pm2 no daemon option')
     .parse(process.argv);
 
-if (!program.port) {
+const options = program.opts();
+if (!options.port) {
     console.log('Must submit port on which to listen...');
     process.exit(1);
-} else if (!program.root) {
+} else if (!options.root) {
     console.log('Must submit root...');
     process.exit(1);
 }
 
 // retrieve the config folder for this instance of the extension
-const configFolder = fsHelper.GetExtensionDataFolder(extConfigJson.id, program.networkId);
+const configFolder = fsHelper.GetExtensionDataFolder(extConfigJson.id, options.networkId);
 const configFile = path.join(configFolder, 'config.json');
 // save a configuration file in the proper folder
 const configJson = {
@@ -54,11 +54,11 @@ fs.writeFileSync(configFile, JSON.stringify(configJson), 'utf8');
 // apply the middleware in the application
 app.use(middleware);
 // apply other helper middlewares
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
 
 // define a route that can be consumed from a web browser
-app.get(`${program.root}/test`, function(request, response) {
+app.get(`${options.root}/test`, function(request, response) {
     const dbx = request.dbx;                // hyperion namespaces
     const algorithm = request.algorithm;    // hyperion algorithms
     const api = request.api;                // api functions (requested with the second argument at require time)
@@ -67,6 +67,6 @@ app.get(`${program.root}/test`, function(request, response) {
 });
 
 // start your application in the port specified
-app.listen(program.port, () => {
-    console.log(`Server started on port ${program.port}...`);
+app.listen(options.port, () => {
+    console.log(`Server started on port ${options.port}...`);
 });

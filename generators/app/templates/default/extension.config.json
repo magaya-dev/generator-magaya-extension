@@ -4,7 +4,7 @@
 		"name": <%- JSON.stringify(name) %>
 	},
 	"version": "0.0.1",
-	"minimumMagayaVersion": "11.2.0",
+	"minimumMagayaVersion": "11.3.0",
 	"type": "httpServer",
 	"license": "MIT",
 	"install": {
